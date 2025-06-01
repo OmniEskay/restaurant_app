@@ -43,3 +43,22 @@ def delete_menu_item():
         print(f"🗑️ Menu item '{item.name}' deleted.")
     else:
         print("❌ Item not found.")
+
+def add_order():
+    customer = input("Enter customer name: ")
+    view_menu_items()
+    try:
+        item_id = int(input("Enter menu item ID to order: "))
+    except ValueError:
+        print("❌ Invalid ID.")
+        return
+
+    item = session.query(MenuItem).get(item_id)
+    if not item:
+        print("❌ Menu item not found.")
+        return
+
+    order = Order(customer_name=customer, menu_item=item)
+    session.add(order)
+    session.commit()
+    print(f"✅ Order placed for {customer}: {item.name}")
