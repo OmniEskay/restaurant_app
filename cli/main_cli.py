@@ -85,3 +85,33 @@ def delete_order():
         print(f"🗑️ Order #{order_id} deleted.")
     else:
         print("❌ Order not found.")
+
+def run_cli():
+    while True:
+        print("\n📋 Restaurant CLI")
+        print("1. Add Menu Item")
+        print("2. View Menu Items")
+        print("3. Delete Menu Item")
+        print("4. Add Order")
+        print("5. View Orders")
+        print("6. Delete Order")
+        print("7. Exit")
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            add_menu_item()
+        elif choice == "2":
+            view_menu_items()
+        elif choice == "3":
+            delete_menu_item()
+        elif choice == "4":
+            add_order()
+        elif choice == "5":
+            view_orders()
+        elif choice == "6":
+            delete_order()
+        elif choice == "7":
+            print("👋 Goodbye!")
+            break
+        else:
+            print("❌ Invalid choice.")
