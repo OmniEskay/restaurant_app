@@ -62,3 +62,26 @@ def add_order():
     session.add(order)
     session.commit()
     print(f"✅ Order placed for {customer}: {item.name}")
+
+def view_orders():
+    orders = session.query(Order).all()
+    if orders:
+        table = [[o.id, o.customer_name, o.menu_item.name, o.menu_item.price] for o in orders]
+        print(tabulate(table, headers=["Order ID", "Customer", "Item", "Price"]))
+    else:
+        print("📭 No orders found.")
+
+def delete_order():
+    try:
+        order_id = int(input("Enter order ID to delete: "))
+    except ValueError:
+        print("❌ Invalid ID.")
+        return
+
+    order = session.query(Order).get(order_id)
+    if order:
+        session.delete(order)
+        session.commit()
+        print(f"🗑️ Order #{order_id} deleted.")
+    else:
+        print("❌ Order not found.")
